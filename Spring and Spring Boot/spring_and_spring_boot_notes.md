@@ -2,13 +2,16 @@
 
 Presenter: Ken Kousen (ken.kousin@kousenit.com)
 
-Slides: tinyurl.com/y6j6zvds ?
+Slides: tinyurl.com/y6j6zvds
 
 Steps: http://www.kousenit.com/springboot/
 
 Repo: https://github.com/kousen/spring-and-spring-boot
 
 Twitter: [@kenkousin](https://twitter.com/kenkousen)
+
+## Java
+* Like so many java projects, there are decades of legacy domain knowledge behind all these decisions.
 
 ## Spring
 * Spring provides services in a declarative fashion. You provide the metadata and Spring will create it for you.
@@ -168,15 +171,18 @@ public class HelloControllerIntegrationTests {
 }
 ````
 
-## Microservices
+## Other Links
 * https://micronaut.io/ is a cool new framework
 * https://spring.io/ for docs
 
 ## Rest Controller Demo
 * http://localhost:8080/rest?name=Dolly
 
-## Other Stuff
+## Application.properties
 * `application.properties` sets database access, port number, many more things
+* You can override every default that Spring establishes
+
+## Spring Tools for VScode
 * https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-boot-dev-pack
 
 ## Client example
@@ -185,3 +191,9 @@ public class HelloControllerIntegrationTests {
 * Spring is autowiring the single constructor, but say `@Autowired` anyway
 * GDD (guilt driven development) "Oh golly, I should write tests".
 * `Logger` is already there.
+
+# Java Database Connectivity
+* http://www.kousenit.com/springboot/#_using_the_jdbc_template
+* The reactive db and relational databases do not play well together
+* Reactive Drivers are async
+* Spring is working on Reactive Relational (R2) JDBC
