@@ -197,3 +197,79 @@ public class HelloControllerIntegrationTests {
 * The reactive db and relational databases do not play well together
 * Reactive Drivers are async
 * Spring is working on Reactive Relational (R2) JDBC
+* Beans can be in various profiles
+
+* One of the features of Spring Boot is that you can create and populate database tables by define scripts with the names schema.sql and data.sql in the src/main/resources folder. First define the database table in schema.sql
+* (Rails does this much more clearly imo)
+## schema.sql
+```sql
+DROP TABLE IF EXISTS officers;
+CREATE TABLE officers (
+  id         INT         NOT NULL AUTO_INCREMENT,
+  rank       VARCHAR(20) NOT NULL,
+  first_name VARCHAR(50) NOT NULL,
+  last_name  VARCHAR(20) NOT NULL,
+  PRIMARY KEY (id)
+);
+```
+## data.sql
+```sql
+INSERT INTO officers(rank, first_name, last_name) VALUES('CAPTAIN', 'James', 'Kirk');
+INSERT INTO officers(rank, first_name, last_name) VALUES('CAPTAIN', 'Jean-Luc', 'Picard');
+INSERT INTO officers(rank, first_name, last_name) VALUES('CAPTAIN', 'Benjamin', 'Sisko');
+INSERT INTO officers(rank, first_name, last_name) VALUES('CAPTAIN', 'Kathryn', 'Janeway');
+INSERT INTO officers(rank, first_name, last_name) VALUES('CAPTAIN', 'Jonathan', 'Archer');
+```
+
+## Autowiring
+* `JdbcTemplate` can be autowired and will be thread safe now (it used to not be?)
+* `@Repository` does exception handling and translation
+    * lots of checked assumptions are converted to checked exceptions
+* Don't annotate interfaces (unless you're doing SOAP lol)
+
+```java
+@Override
+public long count() {
+    return jdbcTemplate.queryForObject( // convert SQL to a class
+        "select count(*) from officers", Long.class);
+}
+```
+
+## Tests
+* Cool Hamcrest matchers `containsInAnyOrder`
+* "Hamcrest" is an anagram of "matchers"
+
+# JPA Table / Row Configs
+* Again, oh god just use rails. Is this really what we have to do?
+* Hibernate
+```java
+@Entity
+@Table(name = "officers") // Model Officer, table "officers"
+public class Officer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
+    private Rank rank;
+
+    @Column(nullable = false, name = "first_name") // why? terrible idea.
+    private String first;
+
+    @Column(nullable = false, name = "last_name")
+    private String last;
+```
+
+* More stuff about how it "used to be"
+
+```java
+@Repository
+public class JpaOfficerDAO implements OfficerDAO { // NOOOOOOOOOO
+    @PersistenceContext // does lots of magic with connection pool, sql
+    private EntityManager entityManager; // can now use the API
+
+    @Autowired
+    private JdbcTemplate template; // use this to get the ids, not manage it?
+    // "It is not uncommon to use both" Yuck.
+}
+```
