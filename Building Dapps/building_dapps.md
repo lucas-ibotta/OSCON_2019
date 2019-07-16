@@ -81,3 +81,42 @@
 
 ## Deployed Smart Contracts
 * Calling a smart contract makes a new instance of the contract
+
+# Tokens
+
+## What are tokens?
+* It's an arbitrary label for arbitrary value
+* It's not related to Ether (unless you want it to be)
+* It costs next to nothing to create on the ethereum blockchain
+* Fungibility: are two assets equally tradeable for one another?
+
+## Utility vs. Security
+* Howey Test - an orange grove in Florida set a prescident that value would increase, it is a security
+* That means you need to follow securities law. That's essentially all ICOs as the SEC sees it.
+* A utility token means that the value will not go up over time. It's what needs to be proven now.
+
+## ICOs
+* Selling tokens for ether
+* Ratio of how much ether you sent and how many tokens you should get
+* totally unregulated and that caused a ton of issues
+* it's tough to transfer eth into banks and into cash
+* KYC (know your customer) and AML (anti money laundering)
+
+## Filecoin ICO 2018
+* Filecoin did $200M in one hour
+* SAFT: simple agreement for future tokens
+* It's a promise of a token, and a token is a promise so they sold promised promises.
+
+## SEC Gets Involved
+* Security Token Offerings: STO
+* KYC and AML issues
+* Whitelists
+
+# Chain Development
+* Ganache creates a local blockchain.
+* Web3 is an api layer into the ethereum chain's JSON RPC interface.
+* Infura allows us to connect to the main net and test net RPCs directly.
+
+## Code Along
+* He pre-wrote tons of code to compile and deploy this code but did not share it with us
+* There was no way to keep up with his demo, but it's just the ERC20 token standard
